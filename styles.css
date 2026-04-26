@@ -1,0 +1,539 @@
+/* ─── Reset & Base ────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin:  0;
+  padding: 0;
+  height:  100%;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size:   13px;
+  color:       #eef2f6;
+  /* Same background as Browser Automation Extension */
+  background:
+    radial-gradient(circle at top left,  rgba(255, 111, 71, 0.16), transparent 34%),
+    radial-gradient(circle at top right, rgba(117, 163, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #14181d 0%, #0f1317 100%);
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* ─── Scrollbars (matching existing extension) ────────────────────────────── */
+
+body,
+.middle-scroll,
+.entry-list {
+  scrollbar-width: thin;
+  scrollbar-color: #3f454d #171c22;
+}
+
+body::-webkit-scrollbar,
+.middle-scroll::-webkit-scrollbar,
+.entry-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track,
+.middle-scroll::-webkit-scrollbar-track,
+.entry-list::-webkit-scrollbar-track {
+  background:    #171c22;
+  border-radius: 999px;
+}
+
+body::-webkit-scrollbar-thumb,
+.middle-scroll::-webkit-scrollbar-thumb,
+.entry-list::-webkit-scrollbar-thumb {
+  background:    linear-gradient(180deg, #4a5159 0%, #353b42 100%);
+  border-radius: 999px;
+  border:        2px solid #171c22;
+}
+
+/* ─── App Shell ───────────────────────────────────────────────────────────── */
+
+.app-shell {
+  height:              100vh;
+  display:             grid;
+  grid-template-rows:  auto minmax(0, 1fr) auto;
+  gap:                 12px;
+  padding:             14px;
+}
+
+/* ─── Header / Hero ───────────────────────────────────────────────────────── */
+
+.top-shell {
+  display:        flex;
+  flex-direction: column;
+  gap:            10px;
+}
+
+.hero {
+  display:               grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items:           start;
+  gap:                   12px;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+h1 {
+  font-size:      15px;
+  font-weight:    700;
+  color:          #d5dde6;
+  letter-spacing: 0.03em;
+}
+
+.hero-title {
+  font-size:      22px;
+  font-weight:    800;
+  color:          #f6f8fa;
+  letter-spacing: -0.03em;
+  line-height:    1.05;
+  margin-top:     3px;
+}
+
+.hero-sub {
+  font-size:   11px;
+  color:       #8f9aa6;
+  margin-top:  4px;
+  font-weight: 500;
+}
+
+/* Logo — identical positioning to Browser Automation Extension */
+.hero-logo {
+  width:        84px;
+  height:       84px;
+  object-fit:   contain;
+  justify-self: end;
+  margin-right: 18px;
+  filter:       drop-shadow(0 10px 18px rgba(0, 0, 0, 0.34));
+}
+
+/* ─── Scrape Button (orange CTA) ─────────────────────────────────────────── */
+
+.scrape-btn {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             7px;
+  width:           100%;
+  padding:         13px 16px;
+  border:          0;
+  border-radius:   10px;
+  background:      linear-gradient(180deg, #ff7a40 0%, #e05220 100%);
+  color:           #fff;
+  font-size:       13px;
+  font-weight:     700;
+  letter-spacing:  0.02em;
+  cursor:          pointer;
+  box-shadow:      0 8px 24px rgba(224, 90, 30, 0.40);
+  transition:
+    background   200ms ease,
+    box-shadow   200ms ease,
+    transform    200ms ease;
+}
+
+.scrape-btn:hover {
+  background:  linear-gradient(180deg, #ff8f5c 0%, #ef6030 100%);
+  box-shadow:  0 12px 30px rgba(224, 90, 30, 0.52);
+  transform:   translateY(-1px);
+}
+
+.scrape-btn:disabled {
+  opacity:   0.65;
+  cursor:    not-allowed;
+  transform: none;
+}
+
+.scrape-btn__icon {
+  font-size:   15px;
+  line-height: 1;
+  display:     inline-block;
+}
+
+.scrape-btn__icon.scraping {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Entry counter below the scrape button */
+.entry-count {
+  display:         none; /* toggled in JS */
+  align-items:     center;
+  justify-content: center;
+  gap:             4px;
+  font-size:       11px;
+  color:           #8f9aa6;
+}
+
+/* ─── Middle Scroll Area ──────────────────────────────────────────────────── */
+
+.middle-scroll {
+  min-height:     0;
+  overflow-y:     auto;
+  display:        flex;
+  flex-direction: column;
+  gap:            10px;
+  padding-right:  2px;
+}
+
+/* ─── Empty State ────────────────────────────────────────────────────────── */
+
+.empty-state {
+  display:         none; /* toggled in JS */
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  gap:             10px;
+  padding:         40px 20px;
+  text-align:      center;
+}
+
+.empty-icon {
+  font-size:   40px;
+  line-height: 1;
+  opacity:     0.7;
+}
+
+.empty-title {
+  font-size:   14px;
+  font-weight: 700;
+  color:       #d5dde6;
+}
+
+.empty-hint {
+  font-size:   12px;
+  color:       #7e8894;
+  line-height: 1.55;
+  max-width:   230px;
+}
+
+.empty-hint strong {
+  color: #c5cdd6;
+}
+
+/* ─── Entry List ─────────────────────────────────────────────────────────── */
+
+.entry-list {
+  list-style:     none;
+  margin:         0;
+  padding:        0;
+  display:        flex;
+  flex-direction: column;
+  gap:            9px;
+}
+
+/* ─── Entry Card ─────────────────────────────────────────────────────────── */
+
+.entry-card {
+  border:        1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background:    rgba(25, 31, 38, 0.94);
+  box-shadow:    0 8px 20px rgba(0, 0, 0, 0.20);
+  overflow:      hidden;
+  transition:    border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.entry-card--expanded {
+  border-color: rgba(255, 139, 102, 0.38);
+  box-shadow:   0 10px 28px rgba(255, 100, 40, 0.12);
+}
+
+/* ─── Entry Header Row ───────────────────────────────────────────────────── */
+
+.entry-header {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  padding:     11px 12px;
+  cursor:      pointer;
+  user-select: none;
+  outline:     none;
+  transition:  background 140ms ease;
+}
+
+.entry-header:hover,
+.entry-header:focus-visible {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.entry-favicon-wrap {
+  width:       18px;
+  height:      18px;
+  flex-shrink: 0;
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.entry-favicon {
+  width:        16px;
+  height:       16px;
+  object-fit:   contain;
+  border-radius: 3px;
+}
+
+.entry-meta {
+  flex:      1;
+  min-width: 0;
+}
+
+.entry-title {
+  font-size:     12px;
+  font-weight:   600;
+  color:         #f2f5f8;
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-domain {
+  font-size:     10px;
+  color:         #8f9aa6;
+  margin-top:    2px;
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-chevron {
+  font-size:   9px;
+  color:       #6a7580;
+  flex-shrink: 0;
+  transition:  color 160ms;
+}
+
+.entry-header:hover .entry-chevron {
+  color: #ff8b66;
+}
+
+/* Delete button */
+.entry-delete {
+  width:         26px;
+  min-width:     26px;
+  height:        26px;
+  padding:       0;
+  border:        0;
+  border-radius: 6px;
+  background:    rgba(255, 255, 255, 0.05);
+  color:         #6a7580;
+  font-size:     17px;
+  font-weight:   300;
+  line-height:   1;
+  cursor:        pointer;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  flex-shrink:   0;
+  box-shadow:    none;
+  transition:    background 160ms, color 160ms;
+}
+
+.entry-delete:hover {
+  background: rgba(255, 80, 80, 0.18);
+  color:      #ff7070;
+  transform:  none;
+  box-shadow: none;
+}
+
+/* ─── Entry Expanded Body ────────────────────────────────────────────────── */
+
+.entry-body {
+  padding:    0 12px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Metadata pills */
+.entry-pills {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       6px;
+  padding:   10px 0 9px;
+}
+
+.pill {
+  padding:       3px 8px;
+  border-radius: 999px;
+  background:    rgba(255, 111, 71, 0.10);
+  color:         #ff8b66;
+  font-size:     10px;
+  font-weight:   600;
+  white-space:   nowrap;
+}
+
+.pill--warn {
+  background: rgba(255, 200, 60, 0.10);
+  color:      #ffc940;
+}
+
+/* Content preview */
+.entry-preview {
+  font-size:   11px;
+  color:       #8a96a3;
+  line-height: 1.58;
+  max-height:  76px;
+  overflow:    hidden;
+  display:     -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  margin-bottom: 13px;
+}
+
+/* ─── AI Platform Section ────────────────────────────────────────────────── */
+
+.ai-section {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+}
+
+.ai-section__label {
+  font-size:      10px;
+  font-weight:    700;
+  color:          #6a7580;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ai-grid {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   7px;
+}
+
+/* Shared AI button base */
+.ai-btn {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             6px;
+  padding:         9px 8px;
+  border:          0;
+  border-radius:   8px;
+  font-size:       11px;
+  font-weight:     700;
+  cursor:          pointer;
+  transition:
+    background   180ms ease,
+    box-shadow   180ms ease,
+    transform    180ms ease,
+    opacity      180ms ease;
+}
+
+.ai-btn:hover {
+  transform:  translateY(-1px);
+}
+
+.ai-btn:disabled,
+.ai-btn--loading {
+  opacity:   0.55;
+  cursor:    not-allowed;
+  transform: none;
+}
+
+.ai-icon {
+  width:       16px;
+  height:      16px;
+  flex-shrink: 0;
+  object-fit:  contain;
+}
+
+/* ChatGPT — OpenAI green */
+.ai-btn--chatgpt {
+  background: linear-gradient(180deg, #0e8f70 0%, #0a6e57 100%);
+  color:      #e4fff6;
+  box-shadow: 0 4px 14px rgba(10, 120, 80, 0.30);
+}
+.ai-btn--chatgpt:hover {
+  background: linear-gradient(180deg, #12a882 0%, #0d7f64 100%);
+  box-shadow: 0 6px 18px rgba(10, 120, 80, 0.42);
+}
+
+/* Claude — warm amber (complementary to extension orange) */
+.ai-btn--claude {
+  background: linear-gradient(180deg, #b5601a 0%, #8f4912 100%);
+  color:      #fdf0e2;
+  box-shadow: 0 4px 14px rgba(160, 80, 20, 0.30);
+}
+.ai-btn--claude:hover {
+  background: linear-gradient(180deg, #cc6e1e 0%, #a65519 100%);
+  box-shadow: 0 6px 18px rgba(160, 80, 20, 0.44);
+}
+
+/* Gemini — Google blue */
+.ai-btn--gemini {
+  background: linear-gradient(180deg, #1a6ed8 0%, #1354ab 100%);
+  color:      #e6f1ff;
+  box-shadow: 0 4px 14px rgba(20, 80, 190, 0.30);
+}
+.ai-btn--gemini:hover {
+  background: linear-gradient(180deg, #2280ec 0%, #1b64c4 100%);
+  box-shadow: 0 6px 18px rgba(20, 80, 190, 0.44);
+}
+
+/* Perplexity — teal */
+.ai-btn--perplexity {
+  background: linear-gradient(180deg, #1a9fb5 0%, #127e92 100%);
+  color:      #e2faff;
+  box-shadow: 0 4px 14px rgba(18, 140, 165, 0.30);
+}
+.ai-btn--perplexity:hover {
+  background: linear-gradient(180deg, #22b8d0 0%, #1694ab 100%);
+  box-shadow: 0 6px 18px rgba(18, 140, 165, 0.44);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+
+.bottom-bar {
+  padding:    10px 0 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.disclaimer {
+  font-size:   10px;
+  color:       #6a7580;
+  line-height: 1.5;
+  text-align:  center;
+}
+
+/* ─── Toast ──────────────────────────────────────────────────────────────── */
+
+.toast {
+  position:    fixed;
+  bottom:      56px;
+  left:        50%;
+  transform:   translateX(-50%) translateY(12px);
+  max-width:   85%;
+  white-space: nowrap;
+  padding:     9px 18px;
+  border:      1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  background:  rgba(26, 33, 41, 0.97);
+  color:       #eef2f6;
+  font-size:   12px;
+  font-weight: 500;
+  box-shadow:  0 10px 28px rgba(0, 0, 0, 0.38);
+  opacity:     0;
+  pointer-events: none;
+  z-index:     200;
+  transition:  opacity 220ms ease, transform 220ms ease;
+}
+
+.toast--show {
+  opacity:   1;
+  transform: translateX(-50%) translateY(0);
+}

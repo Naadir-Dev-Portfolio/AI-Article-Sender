@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Article Sender</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- ── Header ─────────────────────────────────────── -->
+    <header class="top-shell">
+      <div class="hero">
+        <div class="hero-copy">
+          <h1>Naadir's</h1>
+          <p class="hero-title">AI Article Sender</p>
+          <p class="hero-sub">Scrape &amp; send to your AI</p>
+        </div>
+        <img
+          class="hero-logo"
+          src="icon/ai_article_summarizer_logo.png"
+          alt="AI Article Sender logo"
+        >
+      </div>
+
+      <button id="scrapeBtn" class="scrape-btn">
+        <span class="scrape-btn__icon">⬇</span>
+        Scrape This Page
+      </button>
+
+      <div id="entryCount" class="entry-count" style="display:none">
+        <span id="entryCountNum">0</span> article<span id="entryCountPlural">s</span> saved
+      </div>
+    </header>
+
+    <!-- ── Article List ────────────────────────────────── -->
+    <main class="middle-scroll">
+
+      <!-- Empty state -->
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon">📄</div>
+        <p class="empty-title">No articles saved yet</p>
+        <p class="empty-hint">
+          Navigate to any article or webpage and click
+          <strong>Scrape This Page</strong> to capture its content.
+        </p>
+      </div>
+
+      <ul id="entryList" class="entry-list" role="list"></ul>
+
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────── -->
+    <footer class="bottom-bar">
+      <p class="disclaimer">
+        Content is stored locally on your device and only sent to the AI platform you choose. Personal use only.
+      </p>
+    </footer>
+
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

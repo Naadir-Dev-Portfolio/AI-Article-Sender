@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "AI Article Sender",
+  "version": "1.0",
+  "description": "Scrape any article and send it instantly to ChatGPT, Claude, Gemini, or Perplexity",
+  "icons": {
+    "16":  "icon/ai_article_summarizer_logo.png",
+    "32":  "icon/ai_article_summarizer_logo.png",
+    "48":  "icon/ai_article_summarizer_logo.png",
+    "128": "icon/ai_article_summarizer_logo.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://www.perplexity.ai/*"
+  ],
+  "action": {
+    "default_title": "AI Article Sender",
+    "default_icon": {
+      "16": "icon/ai_article_summarizer_logo.png",
+      "32": "icon/ai_article_summarizer_logo.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
