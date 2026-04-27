@@ -7,5 +7,11 @@
   "desc": "Chrome extension that scrapes any article and sends the full text directly to ChatGPT, Claude, Gemini, or Perplexity.",
   "code": "https://github.com/Naadir-Dev-Portfolio/AI-Article-Sender/blob/main/sidepanel.js",
   "details": "https://github.com/Naadir-Dev-Portfolio/AI-Article-Sender/blob/main/README.md",
-  "tags": ["Browser Extensions", "Chrome", "JavaScript", "HTML", "CSS"]
+  "tags": [
+    "Browser Extensions",
+    "Chrome",
+    "JavaScript",
+    "HTML",
+    "CSS"
+  ]
 }
