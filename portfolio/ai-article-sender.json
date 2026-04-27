@@ -1,6 +1,6 @@
 {
   "section": "browserextensions",
-  "category": "google-chrome",
+  "category": "chromium",
   "n": 2,
   "title": "AI Article Sender",
   "img": "ai-article-sender.png",
